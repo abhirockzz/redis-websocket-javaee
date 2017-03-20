@@ -1,4 +1,4 @@
-This is an application which displays the currently trending Meetup groups based on their (live) RSVPs feed. It's built using Java EE. Uses WebSocket (both client & server), EJB timers and CDI events to wire things up
+This is an application which displays the currently trending Meetup groups based on their (live) RSVPs feed. It's built using Java EE. Uses WebSocket (both client & server APIs), (Singleton) EJB timers and CDI events to wire things up
 
 ## From Meetup to Redis
 
@@ -18,12 +18,14 @@ Once the data is in a Redis sorted set
 ## To run
 
 - clone
-- change Redis connection details here and here
+- change Redis connection details [here](https://github.com/abhirockzz/redis-websocket-javaee/blob/master/src/main/java/com/wordpress/simplydistributed/meetup/leaderboard/PingForLeaders.java#L42) and [here](https://github.com/abhirockzz/redis-websocket-javaee/blob/master/src/main/java/com/wordpress/simplydistributed/meetup/weboscket/client/MeetupRSVPsWebSocketClient.java#L25)
 - `mvn clean install`
 - deploy the WAR file in any Java EE 7 (or above) compliant container
 - browse to `http://<host:port>/meetup-trending/` e.g. `http://localhost:8080/meetup-trending/`
 
 You should see something like this
+
+[](https://abhirockzz.files.wordpress.com/2017/03/meetup-trending-groups1.jpg)
 
 ## Credits
 
