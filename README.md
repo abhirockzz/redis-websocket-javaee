@@ -1,4 +1,4 @@
-This is an application which displays the currently trending [Meetup](https://www.meetup.com/) groups based on their (live) RSVPs feed. It's built using [Java EE 7](http://www.oracle.com/technetwork/java/javaee/tech/index.html) (uses WebSocket (both client & server APIs), (Singleton) EJB timers and CDI events to wire things up) and [Redis](https://redis.io/)
+This is an application which displays the currently trending [Meetup](https://www.meetup.com/) groups based on their (live) RSVPs feed. It's built using [Java EE 7](http://www.oracle.com/technetwork/java/javaee/tech/index.html) (uses WebSocket client & server APIs, Singleton EJB timers and CDI events to wire things up) and [Redis](https://redis.io/)
 
 ## From Meetup to Redis
 
