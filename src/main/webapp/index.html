@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Trending Meetup Groups</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style type="text/css">
+            h1 {
+                text-align: center;
+                padding-bottom: 1em;
+            }
+            #content {
+                width: 30%;
+                margin: 0 auto;
+            }
+            #topTable {
+            }
+        </style>
+    </head>
+
+    <body onload="startTime()">
+        <div id="txt" align="center"></div>
+
+        <div id="content">
+            <h3>Trending Meetup Groups Live Leaderboard </h3>
+
+            <table id="topTable" class="table">
+                <thead>
+                    <tr>
+                        <th width="75">Rank</th>
+                        <th width="200">Group</th>
+                        <th width="100">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <script type="text/javascript">
+            var baseUri = window.location.href;     // Returns full URL
+            console.log(baseUri);
+            wsUri = baseUri.concat("live/");
+            wsUri = wsUri.replace("http", "ws");
+            console.log(wsUri);
+            function refreshLeaderboard() {
+                var leaderboardSocket = new WebSocket(wsUri);
+                leaderboardSocket.onmessage = function (event) {
+                    scores = JSON.parse(event.data);
+                    //console.log(scores.leaderboard);
+                    //console.log(scores.leaderboard.length);
+                    var tableBody = $("#topTable").find("tbody");
+                    tableBody.empty();
+
+                    for (var i = 0; i < scores.leaderboard.length; i++) {
+                        var row = $("<tr>").append(
+                                $("<td>").text(i + 1),
+                                $("<td>").text(scores.leaderboard[i]["name"]),
+                                $("<td>").text(scores.leaderboard[i]["score"])
+                                );
+                        tableBody.append(row);
+                    }
+                };
+            }
+
+            refreshLeaderboard();
+            //setInterval(refreshLeaderboard, 1000);
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML =
+                        h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i
+                }
+                ;  // add zero in front of numbers < 10
+                return i;
+            }
+        </script>
+
+    </body>
+
+</html>
