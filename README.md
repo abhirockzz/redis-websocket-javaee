@@ -23,9 +23,9 @@ Once the data is in a Redis sorted set
 - deploy the WAR file in any Java EE 7 (or above) compliant container
 - browse to `http://<host:port>/meetup-trending/` e.g. `http://localhost:8080/meetup-trending/`
 
-You should see something like this
+You should see something like this - **Score** represents the frequency of the group occurence in the RSVPs (popularity)
 
-[](https://abhirockzz.files.wordpress.com/2017/03/meetup-trending-groups1.jpg)
+![](https://abhirockzz.files.wordpress.com/2017/03/meetup-trending-groups1.jpg)
 
 ## Credits
 
