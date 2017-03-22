@@ -10,7 +10,7 @@ This is an application which displays the currently trending [Meetup](https://ww
 
 Once the data is in a Redis sorted set
 
-- A Singleton EJB polls Redis to get top 10 `Jedis#zrevrangeByScoreWithScores` groups as per data in the RSVPs
+- A Singleton EJB polls Redis to get top 10 (using `Jedis#zrevrangeByScoreWithScores`) groups as per data in the RSVPs
 - The information is pushed to a WebSocket endpoint via CDI
 - Redis sorted set does all the heavy-lifting: Java EE helps build the solution on top of all this
 - The WebSocket endpoint is consumed from within a HTML file which is in turn accessed by the end user
@@ -18,6 +18,7 @@ Once the data is in a Redis sorted set
 ## To run
 
 - clone
+- start Redis instance
 - change Redis connection details [here](https://github.com/abhirockzz/redis-websocket-javaee/blob/master/src/main/java/com/wordpress/simplydistributed/meetup/leaderboard/PingForLeaders.java#L42) and [here](https://github.com/abhirockzz/redis-websocket-javaee/blob/master/src/main/java/com/wordpress/simplydistributed/meetup/weboscket/client/MeetupRSVPsWebSocketClient.java#L25)
 - `mvn clean install`
 - deploy the WAR file in any Java EE 7 (or above) compliant container
